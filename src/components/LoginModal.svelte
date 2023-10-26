@@ -161,7 +161,7 @@
 
 </script>
 
-<ion-header translucent="true">
+<ion-header translucent={true}>
 	<ion-toolbar id="selectorToolbar">
 		<ion-title>{app_menu_title} Sign {#if signUpMode}Up{:else}In{/if}</ion-title>
 		<ion-buttons slot="start">
