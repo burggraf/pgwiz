@@ -55,12 +55,14 @@
 
 	const appPages: AppPage[] = [
 		{
-			title: 'Dashboard',
-			url: 'dashboardMenu',
-			icon: 'barChart',
-			children: [
-				{ title: 'Welcome', url: 'welcome', icon: 'map', disabled: false },
-			],
+			title: 'Welcome',
+			url: 'welcome',
+			icon: 'happyOutline',
+		},
+		{
+			title: 'My Databases',
+			url: 'databases',
+			icon: 'serverOutline',
 		},
 		{
 			title: 'Help & Information',
