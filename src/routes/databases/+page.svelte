@@ -1,5 +1,5 @@
 <script lang="ts">
-	import DatabaseModal from './DatabaseModal.svelte';
+	import DatabaseModal from './edit/+page.svelte'; //'./DatabaseModal.svelte';
     import { IonPage } from "ionic-svelte"
 	import * as allIonicIcons from 'ionicons/icons';
     import { modalController } from '$ionic/svelte'

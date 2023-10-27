@@ -1,10 +1,25 @@
 <script lang="ts">	
+    import { IonPage } from "ionic-svelte"
 	import { modalController } from '$ionic/svelte'
     import * as allIonicIcons from 'ionicons/icons';
 	import { onMount } from 'svelte'
 	const closeOverlay = () => {
-		modalController.dismiss({ data: Date.now() });
+		if (modal)
+			modalController.dismiss({ data: Date.now() });
+		else
+			window.history.back();
 	};
+
+	let modal = false;
+	modalController.getTop().then((modalElement) => {
+			if (modalElement) {
+				console.log('*** WE ARE MODAL ***')
+				modal = true;
+			} else {
+				console.log('*** WE ARE NOT MODAL ***')
+				modal = false;
+			}
+		})
 
 	onMount(() => {
 		setTimeout(() => {
@@ -23,7 +38,7 @@
 	});
 
 </script>
-
+<IonPage>
 <ion-header translucent={true}>
 	<ion-toolbar id="selectorToolbar">
 		<ion-title>Add/Edit Database</ion-title>
@@ -31,7 +46,7 @@
 			<ion-button on:click={closeOverlay}>
 				<ion-icon
 					slot="icon-only"
-					icon={allIonicIcons.closeOutline}
+					icon={modal ? allIonicIcons.closeOutline : allIonicIcons.arrowBackOutline}
 				/>
 			</ion-button>
 		</ion-buttons>
@@ -42,7 +57,7 @@
         stuff goes here
 	</div>
 </ion-content>
-
+</IonPage>
 <style>
 	.LoginGrid {
 		max-width: 375px;
