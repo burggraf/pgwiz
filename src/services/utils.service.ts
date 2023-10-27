@@ -23,6 +23,7 @@ export const openModal = async (theModal: any, theProps: any = {}, theOptions: a
   for (const key in theOptions) {
     obj[key] = theOptions[key];
   }
+  console.log('obj', obj)
   const openLoginModalController = await modalController.create(obj)
 
   openLoginModalController.present();

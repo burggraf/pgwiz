@@ -3,13 +3,13 @@
 	import { modalController } from '$ionic/svelte'
     import * as allIonicIcons from 'ionicons/icons';
 	import { onMount } from 'svelte'
+	export let title: string = 'Add Database';
 	const closeOverlay = () => {
 		if (modal)
 			modalController.dismiss({ data: new Date() });
 		else
 			window.history.back();
 	};
-
 
 	let modal = false;
 	modalController.getTop().then((modalElement) => {
@@ -39,7 +39,7 @@
 <IonPage>
 <ion-header translucent={true}>
 	<ion-toolbar id="selectorToolbar">
-		<ion-title>Add/Edit Database</ion-title>
+		<ion-title>{title}</ion-title>
 		<ion-buttons slot="start">
 			<ion-button on:click={closeOverlay}>
 				<ion-icon

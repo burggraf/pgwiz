@@ -12,7 +12,7 @@
 
 
     const openDatabaseModal = async () => {
-        const { data } = await openModal(DatabaseModal, {}, {})
+        const { data } = await openModal(DatabaseModal, {title: 'Edit the Database'}, {})
         console.log('data', data)
 	}
 
