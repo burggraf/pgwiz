@@ -5,21 +5,19 @@
 	import { onMount } from 'svelte'
 	const closeOverlay = () => {
 		if (modal)
-			modalController.dismiss({ data: Date.now() });
+			modalController.dismiss({ data: new Date() });
 		else
 			window.history.back();
 	};
 
+
 	let modal = false;
 	modalController.getTop().then((modalElement) => {
-			if (modalElement) {
-				console.log('*** WE ARE MODAL ***')
-				modal = true;
-			} else {
-				console.log('*** WE ARE NOT MODAL ***')
-				modal = false;
-			}
-		})
+		if (modalElement) {
+			console.log('*** WE ARE MODAL ***')
+			modal = true;
+		}
+	})
 
 	onMount(() => {
 		setTimeout(() => {

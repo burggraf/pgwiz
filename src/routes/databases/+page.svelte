@@ -3,21 +3,17 @@
     import { IonPage } from "ionic-svelte"
 	import * as allIonicIcons from 'ionicons/icons';
     import { modalController } from '$ionic/svelte'
+    import { openModal } from '$services/utils.service'
 
     const addDatabase = () => {
         console.log('addDatabase')
         openDatabaseModal()
     }
-	const openDatabaseModal = async () => {
-		const openLoginModalController = await modalController.create({
-			component: DatabaseModal,
-			componentProps: {
-			},
-			showBackdrop: true,
-			backdropDismiss: true,
-		})
 
-		await openLoginModalController.present()
+
+    const openDatabaseModal = async () => {
+        const { data } = await openModal(DatabaseModal, {}, {})
+        console.log('data', data)
 	}
 
 
