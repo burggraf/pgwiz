@@ -3,6 +3,7 @@
 	import { modalController } from '$ionic/svelte'
     import * as allIonicIcons from 'ionicons/icons';
 	import { onMount } from 'svelte'
+	import { resizeModal } from '$services/utils.service'
 	export let title: string = 'Add Database';
 	const closeOverlay = () => {
 		if (modal)
@@ -20,19 +21,6 @@
 	})
 
 	onMount(() => {
-		setTimeout(() => {
-			const thing =
-				document.getElementById('selectorDiv')?.parentElement?.parentElement?.parentElement ||
-				({} as any);
-			const toolbar = document.getElementById('selectorToolbar') || ({} as any);
-			const h = thing?.clientHeight - toolbar?.clientHeight + 'px';
-			const obj1 = document.getElementById('selectorDiv')?.parentElement?.parentElement?.style;
-			const obj2 = document.getElementById('selectorDiv')?.parentElement?.style;
-			const obj3 = document.getElementById('selectorDiv')?.style;
-			if (obj1) obj1.height = h;
-			if (obj2) obj2.height = h;
-			if (obj3) obj3.height = h;
-		}, 200);
 	});
 
 </script>

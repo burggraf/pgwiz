@@ -27,6 +27,53 @@ export const openModal = async (theModal: any, theProps: any = {}, theOptions: a
   const openLoginModalController = await modalController.create(obj)
 
   openLoginModalController.present();
+  setTimeout(() => {resizeModal(openLoginModalController)}, 200);
   const { data } = await openLoginModalController.onWillDismiss();
   return data;
+}
+
+export const resizeModal = async (openLoginModalController: HTMLIonModalElement) => {
+  setTimeout(() => {
+    const pg = openLoginModalController.getElementsByClassName('ion-page')[0];
+    const header = pg.getElementsByTagName('ion-header')[0];
+    const content = pg.getElementsByTagName('ion-content')[0];
+    const footer = pg.getElementsByTagName('ion-footer')[0];
+    let p = pg.clientHeight;
+    if (header) p -= header.clientHeight;
+    if (footer) p -= footer.clientHeight;
+    console.log('content.clientHeight', content.clientHeight)
+    console.log('p', p)
+    content.style.height = p + 'px';
+    // console.log('footer.clientHeight', footer.clientHeight)
+    // const thing =
+    //   document.getElementById(coreElement)?.parentElement?.parentElement?.parentElement ||
+    //   ({} as any);
+    // const toolbar = document.getElementById('selectorToolbar') || ({} as any);
+    // const h = thing?.clientHeight - toolbar?.clientHeight + 'px';
+
+    // const obj1 = document.getElementById(coreElement)?.parentElement?.parentElement?.style;
+    // const obj2 = document.getElementById(coreElement)?.parentElement?.style;
+    // const obj3 = document.getElementById(coreElement)?.style;
+    // if (obj1) obj1.height = h;
+    // if (obj2) obj2.height = h;
+    // if (obj3) obj3.height = h;
+  }, 200);
+}
+
+
+export const resizeModal_old = async (coreElement: string) => {
+  setTimeout(() => {
+    const thing =
+      document.getElementById(coreElement)?.parentElement?.parentElement?.parentElement ||
+      ({} as any);
+    const toolbar = document.getElementById('selectorToolbar') || ({} as any);
+    const h = thing?.clientHeight - toolbar?.clientHeight + 'px';
+
+    const obj1 = document.getElementById(coreElement)?.parentElement?.parentElement?.style;
+    const obj2 = document.getElementById(coreElement)?.parentElement?.style;
+    const obj3 = document.getElementById(coreElement)?.style;
+    if (obj1) obj1.height = h;
+    if (obj2) obj2.height = h;
+    if (obj3) obj3.height = h;
+  }, 200);
 }

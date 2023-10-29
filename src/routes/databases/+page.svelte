@@ -2,7 +2,6 @@
 	import DatabaseModal from './edit/+page.svelte'; //'./DatabaseModal.svelte';
     import { IonPage } from "ionic-svelte"
 	import * as allIonicIcons from 'ionicons/icons';
-    import { modalController } from '$ionic/svelte'
     import { openModal } from '$services/utils.service'
 
     const addDatabase = () => {
