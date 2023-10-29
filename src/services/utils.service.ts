@@ -41,39 +41,6 @@ export const resizeModal = async (openLoginModalController: HTMLIonModalElement)
     let p = pg.clientHeight;
     if (header) p -= header.clientHeight;
     if (footer) p -= footer.clientHeight;
-    console.log('content.clientHeight', content.clientHeight)
-    console.log('p', p)
     content.style.height = p + 'px';
-    // console.log('footer.clientHeight', footer.clientHeight)
-    // const thing =
-    //   document.getElementById(coreElement)?.parentElement?.parentElement?.parentElement ||
-    //   ({} as any);
-    // const toolbar = document.getElementById('selectorToolbar') || ({} as any);
-    // const h = thing?.clientHeight - toolbar?.clientHeight + 'px';
-
-    // const obj1 = document.getElementById(coreElement)?.parentElement?.parentElement?.style;
-    // const obj2 = document.getElementById(coreElement)?.parentElement?.style;
-    // const obj3 = document.getElementById(coreElement)?.style;
-    // if (obj1) obj1.height = h;
-    // if (obj2) obj2.height = h;
-    // if (obj3) obj3.height = h;
-  }, 200);
-}
-
-
-export const resizeModal_old = async (coreElement: string) => {
-  setTimeout(() => {
-    const thing =
-      document.getElementById(coreElement)?.parentElement?.parentElement?.parentElement ||
-      ({} as any);
-    const toolbar = document.getElementById('selectorToolbar') || ({} as any);
-    const h = thing?.clientHeight - toolbar?.clientHeight + 'px';
-
-    const obj1 = document.getElementById(coreElement)?.parentElement?.parentElement?.style;
-    const obj2 = document.getElementById(coreElement)?.parentElement?.style;
-    const obj3 = document.getElementById(coreElement)?.style;
-    if (obj1) obj1.height = h;
-    if (obj2) obj2.height = h;
-    if (obj3) obj3.height = h;
   }, 200);
 }
