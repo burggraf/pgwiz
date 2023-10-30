@@ -34,7 +34,6 @@
 		updated_at: 'now()',
 		created_at: 'now()'
 	};
-	console.log('*** project', project)
 	const closeOverlay = (data?: any, error?: any) => {
 		if (modal)
 			modalController.dismiss({ data, error });
@@ -88,7 +87,7 @@
 			<ion-input
 				value={project.title}
 				on:ionChange={(e) => {
-					project.title = e.detail.value;
+					if (e.detail.value) project.title = e.detail.value;
 				}}
 			></ion-input>
 		</ion-item>
@@ -97,7 +96,7 @@
 			<ion-input
 				value={project.comments}
 				on:ionChange={(e) => {
-					project.comments = e.detail.value;
+					if (e.detail.value) project.comments = e.detail.value;
 				}}
 			></ion-input>
 		</ion-item>
@@ -106,7 +105,7 @@
 			<ion-input
 				value={project.connection_string}
 				on:ionChange={(e) => {
-					project.connection_string = e.detail.value;
+					if (e.detail.value) project.connection_string = e.detail.value;
 				}}
 			></ion-input>
 		</ion-item>
@@ -124,48 +123,4 @@
 </ion-footer>
 </IonPage>
 <style>
-	.LoginGrid {
-		max-width: 375px;
-	}
-	.ProvidersGrid {
-		max-width: 375px;
-	}
-	input:-webkit-autofill {
-		-webkit-text-fill-color: var(--ion-color-FORCEDARK);
-		font-weight: 500px;
-	}
-
-	input:-webkit-autofill:focus {
-		-webkit-text-fill-color: var(--ion-color-FORCEDARK);
-		font-weight: 500px;
-	}
-
-	.inputIcon {
-		margin-left: 10px;
-		margin-right: 10px;
-	}
-
-	.loginItem {
-		--padding-start: 0px;
-		--padding-end: 0px;
-		--inner-padding-end: 0px;
-	}
-	.loginInputBoxWithIcon {
-		height: 50px;
-		border: 1px solid rgb(212, 212, 212);
-		background-color: var(--ion-background-color) !important;
-		border-radius: 5px;
-	}
-	.toast {
-		font-weight: bold;
-	}
-	.flex-container {
-		display: flex;
-		display: -webkit-flex;
-		display: -moz-flex;
-		flex-flow: row wrap;
-		-webkit-flex-flow: row wrap;
-		-moz-flex-flow: row wrap;
-		justify-content: center;
-	}
 </style>
