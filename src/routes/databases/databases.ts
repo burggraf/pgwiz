@@ -11,7 +11,10 @@ export const getProject = async (id: string) => {
     const { data, error } = await supabase.from('projects').select('*').eq('id', id).single();
     return { data, error };
 }
-
+export const removeProject = async (id: string) => {
+    const { data, error } = await supabase.from('projects').delete().eq('id', id);
+    return { data, error };
+}
 export const saveProject = async (project: any) => {
     if (project.id === '') {
         delete project.id; // let the database generate a new id

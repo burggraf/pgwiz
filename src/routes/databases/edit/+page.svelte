@@ -1,5 +1,5 @@
 <script lang="ts">	
-	import { getProject, saveProject } from '../databases';
+	import { getProject, saveProject, removeProject } from '../databases';
     import { IonPage } from "ionic-svelte"
 	import { modalController } from '$ionic/svelte'
     import * as allIonicIcons from 'ionicons/icons';
@@ -7,6 +7,7 @@
 	import { isModal } from '$services/utils.service'
 	import { currentUser } from "$services/supabase.auth.service";
 	import type { Database } from '../../../models/schema';
+	import { showConfirm } from '$services/alert.service';
 
 	export let id: string;
 	let modal = false;
@@ -44,6 +45,17 @@
 		const { data, error } = await saveProject(project);
 		console.log('saveProject returned data, error: ', data, error)
 		closeOverlay({data, error});
+	}
+	const remove = async () => {
+		showConfirm({
+			header: 'Delete Database',
+			message: 'Are you sure you want to delete this database?',
+			okHandler: async () => {
+				const { data, error } = await removeProject(project.id);
+				console.log('removeProject returned data, error: ', data, error)
+				closeOverlay({data, error});
+			}
+		})
 	}
 	
 </script>
@@ -101,6 +113,15 @@
 
 	</div>
 </ion-content>
+<ion-footer translucent={true}>
+	{#if project.id !== ''}
+		<div class="ion-padding">
+			<ion-button expand="block" fill="outline" color="danger" on:click={remove}>
+			Delete
+			</ion-button>
+		</div>
+	{/if}
+</ion-footer>
 </IonPage>
 <style>
 	.LoginGrid {
