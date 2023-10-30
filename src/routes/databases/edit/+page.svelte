@@ -1,28 +1,49 @@
 <script lang="ts">	
+	import { getProject, saveProject } from '../databases';
     import { IonPage } from "ionic-svelte"
 	import { modalController } from '$ionic/svelte'
     import * as allIonicIcons from 'ionicons/icons';
-	import { onMount } from 'svelte'
-	import { resizeModal } from '$services/utils.service'
-	export let title: string = 'Add Database';
-	const closeOverlay = () => {
+	import { onMount } from "svelte"
+	import { isModal } from '$services/utils.service'
+	import { currentUser } from "$services/supabase.auth.service";
+	export let id: string;
+	let modal = false;
+	let title = 'Add New Database';
+	onMount(async () => {
+		modal = await isModal();
+		if (id) {
+			title = 'Edit Database';
+			const { data, error } = await getProject(id);
+			if (error) {
+				console.error('error', error)
+			} else {
+				project = data;
+			}
+		} else {
+			project = {
+				comments: '',
+				connection_string: '',
+				//id: '',
+				sort_key: 0,
+				title: '',
+				user_id: $currentUser.id,
+				updated_at: 'now()'
+			}
+		}
+	})
+	let project: any = {};
+	const closeOverlay = (data?: any, error?: any) => {
 		if (modal)
-			modalController.dismiss({ data: new Date() });
+			modalController.dismiss({ data, error });
 		else
 			window.history.back();
 	};
-
-	let modal = false;
-	modalController.getTop().then((modalElement) => {
-		if (modalElement) {
-			console.log('*** WE ARE MODAL ***')
-			modal = true;
-		}
-	})
-
-	onMount(() => {
-	});
-
+	const save = async () => {
+		const { data, error } = await saveProject(project);
+		console.log('saveProject returned data, error: ', data, error)
+		closeOverlay({data, error});
+	}
+	
 </script>
 <IonPage>
 <ion-header translucent={true}>
@@ -36,11 +57,46 @@
 				/>
 			</ion-button>
 		</ion-buttons>
+		<ion-buttons slot="end">
+			<ion-button on:click={save}>
+				<ion-icon
+					slot="icon-only"
+					icon={allIonicIcons.checkmarkOutline}
+				/>
+			</ion-button>
+		</ion-buttons>
 	</ion-toolbar>
 </ion-header>
 <ion-content>
-	<div id="selectorDiv" style="overflow-y: scroll;" class="ion-padding">
-        stuff goes here
+	<div id="selectorDiv" class="ion-padding">
+		<ion-item>
+			<ion-label position="stacked">Title</ion-label>
+			<ion-input
+				value={project.title}
+				on:ionChange={(e) => {
+					project.title = e.detail.value;
+				}}
+			></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">Comments</ion-label>
+			<ion-input
+				value={project.comments}
+				on:ionChange={(e) => {
+					project.comments = e.detail.value;
+				}}
+			></ion-input>
+		</ion-item>
+		<ion-item>
+			<ion-label position="stacked">Connection String</ion-label>
+			<ion-input
+				value={project.connection_string}
+				on:ionChange={(e) => {
+					project.connection_string = e.detail.value;
+				}}
+			></ion-input>
+		</ion-item>
+
 	</div>
 </ion-content>
 </IonPage>

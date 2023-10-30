@@ -1,7 +1,8 @@
 import { vitePreprocess } from '@sveltejs/kit/vite';
+
+import { adapter } from './adapter.mjs'
 // you don't need to do this if you're using generateSW strategy in your app
 import { generateSW } from './pwa.mjs'
-import { adapter } from './adapter.mjs'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -26,6 +27,8 @@ const config = {
 			'$stores': 'src/stores',
 			'$components': 'src/components',
 			'$localdata': 'src/localdata',
+			'$models': 'src/models',
+			'$interfaces': 'src/models',
 		},		
 	},
 };
