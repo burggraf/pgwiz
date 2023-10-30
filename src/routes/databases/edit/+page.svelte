@@ -6,6 +6,8 @@
 	import { onMount } from "svelte"
 	import { isModal } from '$services/utils.service'
 	import { currentUser } from "$services/supabase.auth.service";
+	import type { Database } from '../../../models/schema';
+
 	export let id: string;
 	let modal = false;
 	let title = 'Add New Database';
@@ -16,22 +18,22 @@
 			const { data, error } = await getProject(id);
 			if (error) {
 				console.error('error', error)
-			} else {
-				project = data;
-			}
-		} else {
-			project = {
-				comments: '',
-				connection_string: '',
-				//id: '',
-				sort_key: 0,
-				title: '',
-				user_id: $currentUser.id,
-				updated_at: 'now()'
-			}
+			} 
+			if (data) project = data;
+			
 		}
 	})
-	let project: any = {};
+	let project: Database['public']['Tables']['projects']['Row'] = {
+		comments: '',
+		connection_string: '',
+		id: '',
+		sort_key: 0,
+		title: '',
+		user_id: $currentUser.id,
+		updated_at: 'now()',
+		created_at: 'now()'
+	};
+	console.log('*** project', project)
 	const closeOverlay = (data?: any, error?: any) => {
 		if (modal)
 			modalController.dismiss({ data, error });

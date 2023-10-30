@@ -13,31 +13,31 @@ export interface Database {
         Row: {
           comments: string
           connection_string: string
-          created_at: string
+          created_at: string | null
           id: string
-          sort_key: number
+          sort_key: number | null
           title: string
-          updated_at: string
+          updated_at: string | null
           user_id: string
         }
         Insert: {
           comments: string
           connection_string: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          sort_key?: number
+          sort_key?: number | null
           title: string
-          updated_at?: string
+          updated_at?: string | null
           user_id: string
         }
         Update: {
           comments?: string
           connection_string?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          sort_key?: number
+          sort_key?: number | null
           title?: string
-          updated_at?: string
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: [
