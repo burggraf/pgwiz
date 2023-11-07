@@ -2,7 +2,7 @@
   "name": "pgwiz",
   "short_name": "pgwiz",
   "description": "pgwiz",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": true,
   "homepage": "https://github.com/burggraf/pgwiz",
   "menu_title": "pgwiz",
